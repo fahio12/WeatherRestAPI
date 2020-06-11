@@ -11,7 +11,8 @@
       "temperature": "81 F",
       "sky": "Clear",
       "humidity": "77%",
-      "windspeed": "7 mph"
+      "windspeed": "7 mph",
+      "precipitation": "82%"
     }
   }]
 }
