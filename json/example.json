@@ -1,0 +1,17 @@
+{
+  "features": [
+    {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.195, 25.775]
+    },
+    "properties": {
+      "name": "Miami",
+      "temperature": "81 F",
+      "sky": "Clear",
+      "humidity": "77%",
+      "windspeed": "7 mph"
+    }
+  }]
+}

@@ -1,7 +1,11 @@
 from flask import Flask,jsonify
-app = Flask(__name__)
+from weather.weather import weather
 
-@app.route("/hello")
+app = Flask(__name__)
+app.register_blueprint(weather,url_prefix="/weather")
+
+
+@app.route("/")
 def hello():
     return jsonify({"about":"Hello world"})
 @app.route("/bye")
