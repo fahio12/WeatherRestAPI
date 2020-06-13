@@ -17,17 +17,13 @@ def getCityData(city):
     data = requests.get(API+city).json()
     return data
 
-# get long and lat FUTURE
 
 # always getting temperature from the day NOT NIGHT
 def cityJson(city):
-
+    # gets template and updates it with the data from the api
     template = getJson()
     cityData = getCityData(city)
     tempProperties = template["features"][0]["properties"]
-    print(cityData)
-    print(template["features"][0]["properties"])
-
     for properties in tempProperties:
         for (key,value) in cityData.items():
             if type(value) == dict:
@@ -36,8 +32,15 @@ def cityJson(city):
                         tempProperties[properties] = value[segment]
             elif properties == key:
                 tempProperties[properties] = value
+    # exempt
     tempProperties["description"] = cityData["weather"][0]["description"]
-    print(tempProperties)
+    # lon and lat
+    template["features"][0]["geometry"]["coordinates"][0] = cityData["coord"]["lon"]
+    template["features"][0]["geometry"]["coordinates"][1] = cityData["coord"]["lat"]
+    # update properties
+    template["features"][0]["properties"] = tempProperties
+
+    return template
 
 cityJson("Madrid")
 # print(cityJson("Miami"))
