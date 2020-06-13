@@ -4,25 +4,27 @@ import requests
 API_KEY = "7d3cfc90f1c59c1c1d4ea25b4116156c"
 API_SITE = "http://api.openweathermap.org/data/2.5/weather?"
 # make units dinamic
-API = f"{API_SITE}appid={API_KEY}&units=imperial&q="
+API = f"{API_SITE}appid={API_KEY}&q="
 
 
 def getJson():
-    with open("../json/example.json") as f:
+    with open("./json/example.json") as f:
         data = json.load(f)
     return data
 
 # fix l8er
-def getCityData(city):
-    data = requests.get(API+city).json()
+def getCityData(city,units):
+    if (units != "imperial" and units != "metric"):
+        units = "imperial"
+    data = requests.get(f"{API}{city}&units={units}").json()
     return data
 
 
 # always getting temperature from the day NOT NIGHT
-def cityJson(city):
+def cityJson(city,unit = "imperial"):
     # gets template and updates it with the data from the api
     template = getJson()
-    cityData = getCityData(city)
+    cityData = getCityData(city,unit)
     tempProperties = template["features"][0]["properties"]
     for properties in tempProperties:
         for (key,value) in cityData.items():
@@ -41,6 +43,3 @@ def cityJson(city):
     template["features"][0]["properties"] = tempProperties
 
     return template
-
-cityJson("Madrid")
-# print(cityJson("Miami"))

@@ -1,4 +1,4 @@
-from flask import Blueprint,jsonify
+from flask import Blueprint,jsonify,request
 from weather import helper
 
 weather = Blueprint("weather",__name__)
@@ -9,4 +9,6 @@ def home():
 
 @weather.route("/<city>")
 def city(city):
-    return jsonify({"city":city})
+    unit = request.args['unit']
+    data = helper.cityJson(city,unit)
+    return jsonify(data)
