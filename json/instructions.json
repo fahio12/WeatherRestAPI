@@ -1,0 +1,4 @@
+{
+  "instructions":"To make a call use /weather/<CITY_NAME>",
+  "params":"You can add ?units = metric/imperial for Celsius and Fahrenheit"
+}
